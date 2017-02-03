@@ -163,7 +163,7 @@ button {
 	left: 64%;
 }
 
-@media screen and (max-width: 850px), (max-height: 850px) {
+@media screen and (max-width: 850px) {
 	button {
 		font-size: 1em;
 	}
@@ -178,25 +178,31 @@ button {
 	}
 
 	.header {
-		height: 20px;
-		padding: 10px 0px 15px;
+		max-height: 50px;
+		padding: 20px 0px 15px;
 	}
 }
 
 @media screen and (max-width: 750px), (max-height: 750px) {
 	.score-box {
-		width: 400px;
+		max-width: 400px;
+		max-height: 50px;
+		letter-spacing: normal;
 	}
 
 	.score {
-		margin: 12% 30px;
+		margin: 10px 20px;
+	}
+
+	.game-container {
+		max-width: 300px;
+		max-height: 300px;
 	}
 }
 
 @media screen and (max-width: 650px), (max-height: 650px) {
-	.game-container {
-		width: 400px;
-		height: 400px;
+	h1 {
+		display: none;
 	}
 
 	#box3 {
@@ -214,14 +220,19 @@ button {
 	#instrText {
 		display: none;
 	}
+
+	.header {
+		max-height: 50px;
+		padding: 20px 0px 15px;
+	}
 }
 
 @media screen and (max-width: 430px), (max-height: 430px) {
 	.score-box {
-		width: 300px;
+		max-width: 300px;
 	}
 
-	.score {
-		margin: 10% 10px;
+	button {
+		font-size: 0.5em;
 	}
 }

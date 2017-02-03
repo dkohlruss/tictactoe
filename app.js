@@ -144,6 +144,7 @@ function Game(opponent) {
 		    self.player2 = new Player(teams.replace(this.id,''));
         } else {
 		    self.player2 = new Computer(teams.replace(this.id,''));
+            $('#p2score').attr('src','http://plainicon.com/download-icons/51131/plainicon.com-51131-e05b-512px.png');
 
         }
 
@@ -294,7 +295,6 @@ function go() {
 	$('button').each(function() {
 		$(this).click(function() {
             $('.instructions').text('');
-            $('#p2score').attr('src','http://plainicon.com/download-icons/51131/plainicon.com-51131-e05b-512px.png');
 			game = new Game(this.id);
 			game.newGame();
 		});
