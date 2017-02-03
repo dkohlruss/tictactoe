@@ -1,4 +1,4 @@
-function Game(bool) {
+function Game(opponent) {
 	var self = this;
 	this.playerTurn = true;
 	this.chosenSpaces = [];
@@ -14,13 +14,19 @@ function Game(bool) {
 	};					// Key = square number
 						// Value = occupant of square
 	this.winningCombos = [[1,2,3],[4,5,6],[7,8,9],[1,5,9],[1,4,7],[2,5,8],[3,5,7],[3,6,9]];
+	this.player1Score = $('#score1').text();
+	this.player2Score = $('#score2').text();
+	this.tieScore = $('#score3').text();
 
 	this.newGame = function() {
-		// bool in Game constructor = true = 2p, false = cpu -- Implement later
+	    // Resets board to blank
+        for (var i = 1; i < 10; i++) {
+            $('#box' + i).html(this.board[i]);
+        }
 
 		// Choose X and O and create players
 		$('.instructions').css('display','block');
-		$('.instructions').append('<button id="x">X</button><-- Choose your side --><button id="o">O</button>');
+		$('.instructions').html('<button id="x">X</button><span id="instrText">Choose your side</span><button id="o">O</button>');
 		$('button').each(function() {
 			$(this).click(createPlayer);
 		});
@@ -92,38 +98,65 @@ function Game(bool) {
 	};
 
 	this.endGame = function(winCombo) {
+	    var winner;
 		if (arguments.length > 0) { // If a winning combo has been passed
 			switch (self.playerTurn) {
 				case true: // Player 1 wins
-					console.log('Player 1 wins!');
+					winner = 'Player 1 wins!';
+				    self.player1Score++;
+				    $('#score1').text(self.player1Score);
 					break;
 				case false: // Player 2 / CPU wins!
-					console.log('Player 2 wins!');
+				    if (self.player2.constructor.name === 'Player') {
+				        winner = 'Player 2 wins!';
+                    } else {
+				        winner = 'Computer wins!'
+                    }
+				    self.player2Score++;
+                    $('#score2').text(self.player2Score);
 					break;
 			}
 		} else {
 			console.log("It's a tie!");
+			winner = 'It\'s a tie!';
+            self.tieScore++;
+            $('#score3').text(self.tieScore);
 		}
 
+        // Turns off clickability of each square at the end of a the game
         $('.square').each(function() {
             $(this).off();
         });
 
 		// TODO: Create a newgame prompt to start a new game
-
+        $('.instructions').html(winner + '<button>Play again?</button>').css('display','block');
+        $('button').click(function() {
+           game = new Game(opponent);
+           game.newGame();
+        });
 	};
 
 	function createPlayer() {
-	    // TODO: Use self.bool to determine human or computer
+	    // Use 'opponent' parameter to determine human or computer
 		var teams = "xo";
 		self.player1 = new Player(this.id);
-		self.player2 = new Computer(teams.replace(this.id,''));
-		// Creates the 2 players, right now both human
+		if (opponent === 'Human') {
+		    self.player2 = new Player(teams.replace(this.id,''));
+        } else {
+		    self.player2 = new Computer(teams.replace(this.id,''));
 
-		// Removes instructions window and starts the game
-		$('.instructions').css('display','none');
+        }
 
-		self.player1.getClick();
+		// Removes instructions
+		$('.instructions').text('Game On!');
+
+		// X always goes first -- Start of game here
+        if (self.player1.team === 'x') {
+            self.player1.getClick();
+        } else {
+            self.playerTurn = false;
+            self.player2.getClick();
+        }
 	}
 }
 
@@ -143,26 +176,23 @@ function Player(team) {
 					}
 			});
 		});
-	}
+	};
 }
 
 function Computer(team) {
     var self = this;
 	this.team = team;
-	this.compSquares = [];
 
     // AI for computer processed in this function
 	this.getClick = function() {
-	    var choice = 0;
 	    var blankSpaces = []; // Blank spaces
-        var cornerSquares = [1,3,7,9];
+        var cornerSquares = [1,3,5,7,9];
         var sideSquares = [2,4,6,8];
 
 	    // Iterate through most to least favorable conditions
 
         // Winning conditions satisfied (for win & block)
         var winningConditions = function(team) {
-            var chooseThis = false;
             var newCombos = [];
             var len = Object.keys(game.board).length;
             var regMatch = new RegExp(team, 'g');
@@ -230,7 +260,7 @@ function Computer(team) {
             game.setClick(winningConditions(game.player1.team), self.team);
         }
 
-        // Choose a corner
+        // Choose a corner or center
         else if (choiceConditions(cornerSquares)) {
             console.log("Corner?");
             console.log(choiceConditions(cornerSquares));
@@ -240,12 +270,6 @@ function Computer(team) {
             }); // (Sort of) randomizes the array -- From http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
             console.log(cornerChoices[0]);
             game.setClick(cornerChoices[0], self.team);
-        }
-
-        // Choose the center
-        else if (blankSpaces.indexOf(5) !== -1) {
-            console.log(5);
-            game.setClick(5, self.team);
         }
 
         // Choose a side
@@ -265,8 +289,16 @@ function Computer(team) {
 }
 
 function go() {
-	game = new Game(false);
-	game.newGame();
-}
+    $('.instructions').css('display','block');
+    $('.instructions').append('<button id="Human">Human</button><span id="instrText">Choose your opponent</span><button id="Computer">Computer</button>');
+	$('button').each(function() {
+		$(this).click(function() {
+            $('.instructions').text('');
+            $('#p2score').attr('src','http://plainicon.com/download-icons/51131/plainicon.com-51131-e05b-512px.png');
+			game = new Game(this.id);
+			game.newGame();
+		});
+	});
 
+}
 $(document).ready(go);

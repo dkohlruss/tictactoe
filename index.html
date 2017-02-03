@@ -1,24 +1,42 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	</head>
 	<body>
-	<div class="instructions">Hi!</div>
+	<div class="header">
+        <h1>Tic Tac Toe</h1>
+        <div class="instructions"></div>
+    </div>
 
-	<div class="row">
-		<div class="square" id="box1"></div>
-		<div class="square" id="box2"></div>
-		<div class="square" id="box3"></div>
-	</div>
-	<div class="row">
-		<div class="square" id="box4"></div>
-		<div class="square" id="box5"></div>
-		<div class="square" id="box6"></div>
-	</div>
-	<div class="row">
-		<div class="square" id="box7"></div>
-		<div class="square" id="box8"></div>
-		<div class="square" id="box9"></div>
+    <div class="game-container">
+        <div class="row">
+            <div class="square" id="box1"></div>
+            <div class="square" id="box2"></div>
+            <div class="square" id="box3"></div>
+        </div>
+        <div class="row">
+            <div class="square" id="box4"></div>
+            <div class="square" id="box5"></div>
+            <div class="square" id="box6"></div>
+        </div>
+        <div class="row">
+            <div class="square" id="box7"></div>
+            <div class="square" id="box8"></div>
+            <div class="square" id="box9"></div>
+        </div>
+    </div>
+
+	<div class="score-box">
+		<div class="score" id="player1">
+			<img src="https://openclipart.org/download/247319/abstract-user-flat-3.svg"><span id="score1">0</span>
+		</div>
+		<div class="score" id="player2">
+			<img src="https://openclipart.org/download/247316/abstract-user-flat-2.svg" id="p2score"><span id="score2">0</span>
+		</div>
+		<div class="score" id="tie">
+			<img src="http://downloadicons.net/sites/default/files/pause-icon-14021.png"><span id="score3">0</span>
+		</div>
 	</div>
 	</body>
 	<script src="jquery-3.1.1.min.js"></script>

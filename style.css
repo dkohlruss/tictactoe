@@ -1,14 +1,87 @@
+@import url('https://fonts.googleapis.com/css?family=Luckiest+Guy|Open+Sans');
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	background: #068D9D;
+}
+
+h1 {
+	font-family: 'Luckiest Guy', cursive;
+	margin: 0 0 10px;
+}
+
+img {
+	height: 30px;
+	width: 30px;
+	padding: 0px 10px;
+}
+
+button {
+	display: inline-block;
+	margin: 0 10px;
+	font-size: 1.25em;
+	background: #5DB7DE;
+	border: none;
+	border-radius: 28px;
+	text-decoration: none;
+	box-shadow: 0px 1px 4px;
+	padding: 5px 20px;
+}
+
+.game-container {
+	position: absolute;
+	margin: auto;
+	top: 10px; bottom: 0;
+	left: 0; right: 0;
+
+	width: 500px;
+	height: 500px;
+
+	padding-left: 0px;
+
+	background: #5DB7DE;
+	border-radius: 10px;
+}
+
+.score-box {
+	position: absolute;
+	margin: auto;
+	bottom: 10px;
+	left: 0; right: 0;
+	width: 700px;
+	height: 100px;
+	background: #AEECEF;
+
+	border-style: solid;
+	border-color: #5DB7DE;
+	border-width: 10px;
+
+	border-radius: 20px;
+
+	align-items: center;
+
+
+	text-align: center;
+	font-size: 1.25em;
+}
+
+.score {
+	display: inline-flex;
+	margin: 6% 70px;
+
+	letter-spacing: 5px;
+}
+
 .square {
-	width: 30%;
-	height: 30%;
-	background: #FFFFFF;
+	width: 33.333%;
+	height: 33.333%;
+	background: #53599A;
 	border-color: #000000;
 	border-style: solid;
 	margin: auto;
 
   	position: absolute;
 	align-items: center;
-	justify-content: center;
 
 	font-size: 5em;
 	text-align: center;
@@ -16,44 +89,48 @@
 	z-index: 1;
 }
 
-.instructions {
-	position: absolute;
+.header {
 	position: absolute;
 	margin: auto;
-	top: 0; bottom: 0;
+	top: 20px;
 	left: 0; right: 0;
 	width: 55%;
-	height: 20%;
-	background: green;
+	height: 100px;
+	background: #AEECEF;
 	color: black;
 	text-align: center;
 
-	display: none;
+	border-style: solid;
+	border-color: #5DB7DE;
+	border-width: 10px;
+	border-radius: 20px;
+
 	z-index: 2;
 }
 
+
 #box1 {
 	border-width: 0px 5px 5px 0px;
-	top: 3%;
-	left: 3%;
+	top: 2%;
+	left: 2%;
 }
 
 #box2 {
 	border-width: 0px 5px 5px 5px;
-	top: 3%;
+	top: 2%;
 	left: 33%;
 }
 
 #box3 {
 	border-width: 0px 0px 5px 5px;
-	top: 3%;
-	left: 63%;
+	top: 2%;
+	left: 64%;
 }
 
 #box4 {
 	border-width: 5px 5px 5px 0px;
 	top: 33%;
-	left: 3%;
+	left: 2%;
 }
 
 #box5 {
@@ -65,24 +142,72 @@
 #box6 {
 	border-width: 5px 0px 5px 5px;
 	top: 33%;
-	left: 63%;
+	left: 64%;
 }
 
 #box7 {
 	border-width: 5px 5px 0px 0px;
-	top: 63%;
-	left: 3%;
+	top: 64%;
+	left: 2%;
 }
 
 #box8 {
 	border-width: 5px 5px 0px 5px;
-	top: 63%;
+	top: 64%;
 	left: 33%;
 }
 
 #box9 {
 	border-width: 5px 0px 0px 5px;
-	top: 63%;
-	left: 63%;
+	top: 64%;
+	left: 64%;
 }
 
+@media screen and (max-width: 850px) {
+	button {
+		font-size: 1em;
+	}
+}
+
+@media screen and (max-width: 750px) {
+	.score-box {
+		width: 400px;
+	}
+
+	.score {
+		margin: 10% 30px;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.game-container {
+		width: 400px;
+		height: 400px;
+	}
+
+	#box3 {
+		left: 63%;
+	}
+
+	#box6 {
+		left: 63%;
+	}
+
+	#box9 {
+		left: 63%;
+	}
+
+	#instrText {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 430px) {
+	.score-box {
+		width: 300px;
+	}
+
+	.score {
+		margin: 10% 10px;
+	}
+}
