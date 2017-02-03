@@ -163,23 +163,37 @@ button {
 	left: 64%;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 850px), (max-height: 850px) {
 	button {
 		font-size: 1em;
 	}
+
+	h1 {
+		display: none;
+	}
+
+	img {
+		padding: 0px;
+
+	}
+
+	.header {
+		height: 20px;
+		padding: 10px 0px 15px;
+	}
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 750px), (max-height: 750px) {
 	.score-box {
 		width: 400px;
 	}
 
 	.score {
-		margin: 10% 30px;
+		margin: 12% 30px;
 	}
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 650px), (max-height: 650px) {
 	.game-container {
 		width: 400px;
 		height: 400px;
@@ -202,7 +216,7 @@ button {
 	}
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 430px), (max-height: 430px) {
 	.score-box {
 		width: 300px;
 	}
