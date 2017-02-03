@@ -80,10 +80,10 @@ function Game(opponent) {
 	this.checkTie = function() {
 		if (self.chosenSpaces.length > 8) {
 			self.endGame();
-		}
-
+		} else {
 		self.nextTurn();
-	};
+        }
+    };
 
 	this.nextTurn = function() {
 		if (self.playerTurn) {
@@ -93,8 +93,6 @@ function Game(opponent) {
 			self.playerTurn = true;
 			self.player1.getClick();
 		}
-
-
 	};
 
 	this.endGame = function(winCombo) {
@@ -128,7 +126,7 @@ function Game(opponent) {
             $(this).off();
         });
 
-		// TODO: Create a newgame prompt to start a new game
+		// Replay?
         $('.instructions').html(winner + '<button>Play again?</button>').css('display','block');
         $('button').click(function() {
            game = new Game(opponent);
@@ -145,12 +143,9 @@ function Game(opponent) {
         } else {
 		    self.player2 = new Computer(teams.replace(this.id,''));
             $('#p2score').attr('src','http://plainicon.com/download-icons/51131/plainicon.com-51131-e05b-512px.png');
-
         }
-
 		// Removes instructions
 		$('.instructions').text('Game On!');
-
 		// X always goes first -- Start of game here
         if (self.player1.team === 'x') {
             self.player1.getClick();
@@ -230,7 +225,6 @@ function Computer(team) {
                         chosen = true;
                         break;
                     }
-
                 }
                 if (chosen) {
                     return blankSpaces[u];
@@ -247,7 +241,6 @@ function Computer(team) {
             }); // returns an array of all values in cornerSquares that are also in
         };
 
-
         // Iterates through possible choices below
         // Win conditions satisfied
         if (winningConditions(self.team) > 0) {
@@ -260,7 +253,6 @@ function Computer(team) {
             console.log("Block!");
             game.setClick(winningConditions(game.player1.team), self.team);
         }
-
         // Choose a corner or center
         else if (choiceConditions(cornerSquares)) {
             console.log("Corner?");
@@ -272,7 +264,6 @@ function Computer(team) {
             console.log(cornerChoices[0]);
             game.setClick(cornerChoices[0], self.team);
         }
-
         // Choose a side
         else {
             console.log("Side");
@@ -282,11 +273,8 @@ function Computer(team) {
             }); // (Sort of) randomizes the array -- From http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
             game.setClick(sideChoices[0], self.team);
         }
-
         game.checkWin(self.team);
 	};
-
-
 }
 
 function go() {
@@ -299,6 +287,5 @@ function go() {
 			game.newGame();
 		});
 	});
-
 }
 $(document).ready(go);
